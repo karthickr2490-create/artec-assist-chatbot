@@ -8,12 +8,10 @@ const leadForm = document.getElementById("leadForm");
 const leadSection = document.getElementById("leadSection");
 const interestDropdown = document.getElementById("interest");
 
-/* Tell Hostinger iframe to expand */
 function notifyParentChatOpen() {
     window.parent.postMessage("ARTEC_CHAT_OPEN", "*");
 }
 
-/* Tell Hostinger iframe to shrink */
 function notifyParentChatClose() {
     window.parent.postMessage("ARTEC_CHAT_CLOSE", "*");
 }
@@ -139,13 +137,109 @@ function showLeadForm() {
     }, 500);
 }
 
-/* Form Submit */
-leadForm.addEventListener("submit", function () {
-    addUserMessage("Submitting inquiry...");
+/* Show Final Thank You Message */
+function showThankYouMessage() {
+    leadSection.innerHTML = `
+        <div style="
+            padding: 28px 18px;
+            text-align: center;
+            background: #ffffff;
+        ">
+            <div style="
+                width: 54px;
+                height: 54px;
+                margin: 0 auto 14px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #2563eb, #22c1c3);
+                color: #ffffff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 26px;
+                font-weight: 800;
+            ">
+                ✓
+            </div>
+
+            <h2 style="
+                font-size: 20px;
+                margin-bottom: 8px;
+                color: #172033;
+            ">
+                Thank you!
+            </h2>
+
+            <p style="
+                font-size: 14px;
+                color: #5b6678;
+                line-height: 1.5;
+                margin-bottom: 18px;
+            ">
+                Your inquiry has been submitted successfully.<br>
+                Our team will contact you shortly.
+            </p>
+
+            <button 
+                onclick="closeThankYouChat()"
+                style="
+                    width: 100%;
+                    border: none;
+                    padding: 12px;
+                    border-radius: 12px;
+                    background: linear-gradient(135deg, #2563eb, #22c1c3);
+                    color: #ffffff;
+                    font-size: 14px;
+                    font-weight: 700;
+                    cursor: pointer;
+                "
+            >
+                Close
+            </button>
+        </div>
+    `;
+
+    leadSection.classList.add("show");
 
     setTimeout(function () {
-        addBotMessage(
-            "Thank you. Your inquiry has been sent successfully. Our team will reach out soon."
-        );
-    }, 700);
+        leadSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }, 150);
+}
+
+/* Close Thank You */
+function closeThankYouChat() {
+    chatbotWrapper.classList.remove("open");
+    chatLauncher.style.display = "flex";
+    notifyParentChatClose();
+}
+
+/* Submit Form Without Redirect */
+leadForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    addUserMessage("Submitting inquiry...");
+
+    const formData = new FormData(leadForm);
+
+    fetch(leadForm.action, {
+        method: "POST",
+        body: formData,
+        headers: {
+            "Accept": "application/json"
+        }
+    })
+        .then(function (response) {
+            if (response.ok) {
+                addBotMessage("Thank you. Your inquiry has been sent successfully.");
+                leadForm.reset();
+                showThankYouMessage();
+            } else {
+                addBotMessage("Sorry, something went wrong while submitting. Please try again.");
+            }
+        })
+        .catch(function () {
+            addBotMessage("Sorry, something went wrong while submitting. Please try again.");
+        });
 });
