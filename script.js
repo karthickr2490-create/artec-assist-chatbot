@@ -16,30 +16,17 @@ function notifyParentChatClose() {
     window.parent.postMessage("ARTEC_CHAT_CLOSE", "*");
 }
 
-function lockMobileScroll() {
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
-}
-
-function unlockMobileScroll() {
-    document.body.style.overflow = "";
-    document.documentElement.style.overflow = "";
-}
-
 /* Open Chat */
 chatLauncher.addEventListener("click", function () {
     chatbotWrapper.classList.add("open");
     chatLauncher.style.display = "none";
-    lockMobileScroll();
     notifyParentChatOpen();
-    scrollChat();
 });
 
 /* Close Chat */
 closeChat.addEventListener("click", function () {
     chatbotWrapper.classList.remove("open");
     chatLauncher.style.display = "flex";
-    unlockMobileScroll();
     notifyParentChatClose();
 });
 
@@ -91,7 +78,7 @@ function selectTopic(topic) {
     switch (topic) {
         case "Contact Center Technologies":
             response =
-                "We help enterprises modernize customer operations across AWS, Amazon Connect, Five9 and Genesys, including IVR, routing, automation and contact center transformation.";
+                "We help enterprises modernize customer operations across AWS, Amazon Connect, Five9 and Genesys including IVR, routing, automation and contact center transformation.";
             break;
 
         case "Agentic AI, ML & Process Intelligence":
@@ -125,7 +112,7 @@ function selectTopic(topic) {
 
     setTimeout(function () {
         addBotMessage(
-            "You can also share your details using the Share Your Details option."
+            "If you'd like, you can also share your details using the Share Your Details option."
         );
     }, 1400);
 }
@@ -153,17 +140,59 @@ function showLeadForm() {
 /* Show Final Thank You Message */
 function showThankYouMessage() {
     leadSection.innerHTML = `
-        <div class="thank-you-box">
-            <div class="thank-you-icon">✓</div>
+        <div style="
+            padding: 28px 18px;
+            text-align: center;
+            background: #ffffff;
+        ">
+            <div style="
+                width: 54px;
+                height: 54px;
+                margin: 0 auto 14px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #2563eb, #22c1c3);
+                color: #ffffff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 26px;
+                font-weight: 800;
+            ">
+                ✓
+            </div>
 
-            <h2>Thank you!</h2>
+            <h2 style="
+                font-size: 20px;
+                margin-bottom: 8px;
+                color: #172033;
+            ">
+                Thank you!
+            </h2>
 
-            <p>
+            <p style="
+                font-size: 14px;
+                color: #5b6678;
+                line-height: 1.5;
+                margin-bottom: 18px;
+            ">
                 Your inquiry has been submitted successfully.<br>
                 Our team will contact you shortly.
             </p>
 
-            <button onclick="closeThankYouChat()" class="thank-you-close-btn">
+            <button 
+                onclick="closeThankYouChat()"
+                style="
+                    width: 100%;
+                    border: none;
+                    padding: 12px;
+                    border-radius: 12px;
+                    background: linear-gradient(135deg, #2563eb, #22c1c3);
+                    color: #ffffff;
+                    font-size: 14px;
+                    font-weight: 700;
+                    cursor: pointer;
+                "
+            >
                 Close
             </button>
         </div>
@@ -183,7 +212,6 @@ function showThankYouMessage() {
 function closeThankYouChat() {
     chatbotWrapper.classList.remove("open");
     chatLauncher.style.display = "flex";
-    unlockMobileScroll();
     notifyParentChatClose();
 }
 
@@ -199,7 +227,7 @@ leadForm.addEventListener("submit", function (e) {
         method: "POST",
         body: formData,
         headers: {
-            Accept: "application/json"
+            "Accept": "application/json"
         }
     })
         .then(function (response) {
@@ -214,19 +242,4 @@ leadForm.addEventListener("submit", function (e) {
         .catch(function () {
             addBotMessage("Sorry, something went wrong while submitting. Please try again.");
         });
-});
-
-/* Handle browser resize / orientation change */
-window.addEventListener("resize", function () {
-    if (chatbotWrapper.classList.contains("open")) {
-        scrollChat();
-    }
-});
-
-window.addEventListener("orientationchange", function () {
-    setTimeout(function () {
-        if (chatbotWrapper.classList.contains("open")) {
-            scrollChat();
-        }
-    }, 400);
 });
