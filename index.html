@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artec Assist Chatbot</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- Floating Chat Button -->
+    <button class="chat-launcher" id="chatLauncher">
+        <span class="launcher-icon">A</span>
+        <span>Artec Assist</span>
+    </button>
+
+    <!-- Chat Widget -->
+    <div class="chatbot-wrapper" id="chatbotWrapper">
+
+        <header class="chatbot-header">
+            <div class="brand-area">
+                <div class="brand-logo">A</div>
+                <div>
+                    <h1>Artec Assist</h1>
+                    <p>Your Artec Solutions guide</p>
+                </div>
+            </div>
+
+            <button class="close-btn" id="closeChat">×</button>
+        </header>
+
+        <main class="chatbot-scroll" id="chatScroll">
+
+            <section class="chatbot-body" id="chatBody">
+
+                <div class="message bot-message">
+                    <div class="message-avatar">A</div>
+                    <div class="message-content">
+                        <p>Hello 👋 Welcome to Artec Solutions.</p>
+                        <p>How can we help you today?</p>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+
+                    <button onclick="selectTopic('Contact Center Technologies')">
+                        Contact Center Technologies
+                    </button>
+
+                    <button onclick="selectTopic('Agentic AI, ML & Process Intelligence')">
+                        Agentic AI, ML & Process Intelligence
+                    </button>
+
+                    <button onclick="selectTopic('CPU/GPU & Semiconductor Engineering')">
+                        CPU/GPU & Semiconductor Engineering
+                    </button>
+
+                    <button onclick="selectTopic('Enterprise Architecture & Skill Delivery')">
+                        Enterprise Architecture & Skill Delivery
+                    </button>
+
+                    <button onclick="selectTopic('Careers / Resume Submission')">
+                        Careers / Resume Submission
+                    </button>
+
+                    <button class="details-option" onclick="showLeadForm()">
+                        Share Your Details →
+                    </button>
+
+                </div>
+
+            </section>
+
+            <!-- Lead Form - Hidden Initially -->
+            <section class="lead-form-section hidden-form" id="leadSection">
+
+                <h2>Share your details</h2>
+                <p>Our team will review your inquiry and get back to you.</p>
+
+                <form id="leadForm" action="https://formsubmit.co/karthick.r2490@gmail.com" method="POST">
+
+                    <input type="hidden" name="_subject" value="New Artec Website Inquiry" />
+                    <input type="hidden" name="_captcha" value="false" />
+                    <input type="hidden" name="_template" value="table" />
+
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="Full Name" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="Email Address" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="company">Company / Organization</label>
+                        <input type="text" id="company" name="Company / Organization" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="Phone Number" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="interest">Area of Interest *</label>
+                        <select id="interest" name="Area of Interest" required>
+                            <option value="">Select an option</option>
+                            <option>Contact Center Technologies</option>
+                            <option>Agentic AI, ML & Process Intelligence</option>
+                            <option>CPU/GPU & Semiconductor Engineering</option>
+                            <option>Enterprise Architecture & Skill Delivery</option>
+                            <option>Careers / Resume Submission</option>
+                            <option>General Inquiry</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="Message" rows="3" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        Submit Inquiry
+                    </button>
+
+                </form>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
