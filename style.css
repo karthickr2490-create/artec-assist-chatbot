@@ -48,8 +48,8 @@ body {
 /* Chat Widget */
 .chatbot-wrapper {
     position: fixed;
-    right: 22px;
-    bottom: 82px;
+    right:0;
+    bottom:75px;
     width: 355px;
     height: 560px;
     max-height: calc(100vh - 110px);
