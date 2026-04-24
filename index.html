@@ -3,21 +3,22 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Artec Assist Chatbot</title>
-    <link rel="stylesheet" href="style.css" />
+
+    <link rel="stylesheet" href="style.css?v=4" />
 </head>
 
 <body>
 
     <!-- Floating Chat Button -->
-    <button class="chat-launcher" id="chatLauncher">
+    <button class="chat-launcher" id="chatLauncher" type="button" aria-label="Open Artec Assist">
         <span class="launcher-icon">A</span>
         <span>Artec Assist</span>
     </button>
 
     <!-- Chat Widget -->
-    <div class="chatbot-wrapper" id="chatbotWrapper">
+    <div class="chatbot-wrapper" id="chatbotWrapper" role="dialog" aria-label="Artec Assist Chatbot">
 
         <header class="chatbot-header">
             <div class="brand-area">
@@ -28,7 +29,9 @@
                 </div>
             </div>
 
-            <button class="close-btn" id="closeChat">×</button>
+            <button class="close-btn" id="closeChat" type="button" aria-label="Close Artec Assist">
+                ×
+            </button>
         </header>
 
         <main class="chatbot-scroll" id="chatScroll">
@@ -45,27 +48,27 @@
 
                 <div class="quick-actions">
 
-                    <button onclick="selectTopic('Contact Center Technologies')">
+                    <button type="button" onclick="selectTopic('Contact Center Technologies')">
                         Contact Center Technologies
                     </button>
 
-                    <button onclick="selectTopic('Agentic AI, ML & Process Intelligence')">
+                    <button type="button" onclick="selectTopic('Agentic AI, ML & Process Intelligence')">
                         Agentic AI, ML & Process Intelligence
                     </button>
 
-                    <button onclick="selectTopic('CPU/GPU & Semiconductor Engineering')">
+                    <button type="button" onclick="selectTopic('CPU/GPU & Semiconductor Engineering')">
                         CPU/GPU & Semiconductor Engineering
                     </button>
 
-                    <button onclick="selectTopic('Enterprise Architecture & Skill Delivery')">
+                    <button type="button" onclick="selectTopic('Enterprise Architecture & Skill Delivery')">
                         Enterprise Architecture & Skill Delivery
                     </button>
 
-                    <button onclick="selectTopic('Careers / Resume Submission')">
+                    <button type="button" onclick="selectTopic('Careers / Resume Submission')">
                         Careers / Resume Submission
                     </button>
 
-                    <button class="details-option" onclick="showLeadForm()">
+                    <button type="button" class="details-option" onclick="showLeadForm()">
                         Share Your Details →
                     </button>
 
@@ -73,7 +76,7 @@
 
             </section>
 
-            <!-- Lead Form - Hidden Initially -->
+            <!-- Lead Form -->
             <section class="lead-form-section hidden-form" id="leadSection">
 
                 <h2>Share your details</h2>
@@ -109,12 +112,12 @@
                         <label for="interest">Area of Interest *</label>
                         <select id="interest" name="Area of Interest" required>
                             <option value="">Select an option</option>
-                            <option>Contact Center Technologies</option>
-                            <option>Agentic AI, ML & Process Intelligence</option>
-                            <option>CPU/GPU & Semiconductor Engineering</option>
-                            <option>Enterprise Architecture & Skill Delivery</option>
-                            <option>Careers / Resume Submission</option>
-                            <option>General Inquiry</option>
+                            <option value="Contact Center Technologies">Contact Center Technologies</option>
+                            <option value="Agentic AI, ML & Process Intelligence">Agentic AI, ML & Process Intelligence</option>
+                            <option value="CPU/GPU & Semiconductor Engineering">CPU/GPU & Semiconductor Engineering</option>
+                            <option value="Enterprise Architecture & Skill Delivery">Enterprise Architecture & Skill Delivery</option>
+                            <option value="Careers / Resume Submission">Careers / Resume Submission</option>
+                            <option value="General Inquiry">General Inquiry</option>
                         </select>
                     </div>
 
@@ -135,7 +138,7 @@
 
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=4"></script>
 </body>
 
 </html>
